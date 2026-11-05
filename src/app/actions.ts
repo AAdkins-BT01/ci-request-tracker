@@ -51,7 +51,8 @@ export async function createRequest(
     await sendNewRequestEmail(row);
   } catch (err) {
     console.error("[createRequest] failed:", err);
-    return { error: "Something went wrong submitting your request. Please try again." };
+    // TEMP DEBUG — remove before considering this done
+    return { error: `DEBUG: ${err instanceof Error ? err.message : String(err)}` };
   }
 
   redirect(`/r/${newId}`);
