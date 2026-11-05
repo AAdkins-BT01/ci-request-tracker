@@ -52,7 +52,8 @@ export async function createRequest(
   } catch (err) {
     console.error("[createRequest] failed:", err);
     // TEMP DEBUG — remove before considering this done
-    return { error: `DEBUG: ${err instanceof Error ? err.message : String(err)}` };
+    const cause = err instanceof Error && err.cause instanceof Error ? err.cause.message : null;
+    return { error: `DEBUG: ${err instanceof Error ? err.message : String(err)} || CAUSE: ${cause}` };
   }
 
   redirect(`/r/${newId}`);
